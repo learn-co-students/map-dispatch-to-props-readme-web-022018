@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
 import { addItem } from  './actions/items';
+import { bindActionCreators } from 'redux'
 
 class App extends Component {
 
   handleOnClick() {
-    this.props.store.dispatch(addItem());
+    this.props.addItem()
   }
 
   render() {
@@ -27,4 +28,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = () => {
+  return bindActionCreators({
+    addItem: addItem
+  }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
